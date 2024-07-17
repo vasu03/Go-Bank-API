@@ -2,24 +2,34 @@
 package main
 
 // Importingrequired modules
-import "math/rand"
+import (
+	"math/rand"
+	"time"
+)
 
 // Creating a structure of Account
 type Account struct {
-	ID        int    `json:"id"`
+	ID        int       `json:"id"`
+	FirstName string    `json:"firstName"`
+	LastName  string    `json:"lastName"`
+	Number    int64     `json:"number"`
+	Balance   float64   `json:"balance"`
+	CreatedAt time.Time `json:"createdAt"`
+}
+
+// Creating a structure of request for creating a account
+type CreateAccountRequest struct {
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
-	Number    int64  `json:"number"`
-	Balance   int64  `json:"balance"`
 }
 
 // Creating the new account
 func NewAccount(firstName, lastName string) *Account {
 	return &Account{
-		ID:        rand.Intn(1000),
 		FirstName: firstName,
 		LastName:  lastName,
 		Number:    int64(rand.Intn(10000)),
-		Balance:   int64(rand.Intn(10000)),
+		Balance:   0,
+		CreatedAt: time.Now().UTC(),
 	}
 }
